@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		4C0939DC22123D0F0048B1A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0939DB22123D0F0048B1A6 /* AppDelegate.swift */; };
 		4C0939DE22123D0F0048B1A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0939DD22123D0F0048B1A6 /* ViewController.swift */; };
-		4C0939E122123D0F0048B1A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0939DF22123D0F0048B1A6 /* Main.storyboard */; };
 		4C0939E322123D110048B1A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0939E222123D110048B1A6 /* Assets.xcassets */; };
 		4C0939E622123D110048B1A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C0939E422123D110048B1A6 /* LaunchScreen.storyboard */; };
+		4C0939EE221244710048B1A6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0939ED221244710048B1A6 /* Colors.swift */; };
+		4C0939F0221246640048B1A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0939EF221246630048B1A6 /* GoogleService-Info.plist */; };
+		4C0939F3221247310048B1A6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0939F2221247310048B1A6 /* Firebase.swift */; };
 		D2EAAE711DF64299014395AC /* Pods_Parstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5D8EF21A74C68C28F969E7 /* Pods_Parstagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -20,10 +22,12 @@
 		4C0939D822123D0F0048B1A6 /* Parstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0939DB22123D0F0048B1A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C0939DD22123D0F0048B1A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4C0939E022123D0F0048B1A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C0939E222123D110048B1A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C0939E522123D110048B1A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C0939E722123D110048B1A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C0939ED221244710048B1A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4C0939EF221246630048B1A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4C0939F2221247310048B1A6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		DB77B599213D40CD51F1ED6B /* Pods-Parstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.release.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.release.xcconfig"; sourceTree = "<group>"; };
 		F286B5F1F5F1E46D5CCA9B5A /* Pods-Parstagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.debug.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,6 +56,7 @@
 		4C0939CF22123D0F0048B1A6 = {
 			isa = PBXGroup;
 			children = (
+				4C0939F1221247220048B1A6 /* Firebase */,
 				4C0939DA22123D0F0048B1A6 /* Parstagram */,
 				4C0939D922123D0F0048B1A6 /* Products */,
 				2144390A712224304E4F323C /* Pods */,
@@ -71,13 +76,22 @@
 			isa = PBXGroup;
 			children = (
 				4C0939DB22123D0F0048B1A6 /* AppDelegate.swift */,
+				4C0939ED221244710048B1A6 /* Colors.swift */,
 				4C0939DD22123D0F0048B1A6 /* ViewController.swift */,
-				4C0939DF22123D0F0048B1A6 /* Main.storyboard */,
 				4C0939E222123D110048B1A6 /* Assets.xcassets */,
 				4C0939E422123D110048B1A6 /* LaunchScreen.storyboard */,
 				4C0939E722123D110048B1A6 /* Info.plist */,
 			);
 			path = Parstagram;
+			sourceTree = "<group>";
+		};
+		4C0939F1221247220048B1A6 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				4C0939F2221247310048B1A6 /* Firebase.swift */,
+				4C0939EF221246630048B1A6 /* GoogleService-Info.plist */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		604F462518A17224F554D4CA /* Frameworks */ = {
@@ -150,7 +164,7 @@
 			files = (
 				4C0939E622123D110048B1A6 /* LaunchScreen.storyboard in Resources */,
 				4C0939E322123D110048B1A6 /* Assets.xcassets in Resources */,
-				4C0939E122123D0F0048B1A6 /* Main.storyboard in Resources */,
+				4C0939F0221246640048B1A6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +231,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0939DE22123D0F0048B1A6 /* ViewController.swift in Sources */,
+				4C0939EE221244710048B1A6 /* Colors.swift in Sources */,
+				4C0939F3221247310048B1A6 /* Firebase.swift in Sources */,
 				4C0939DC22123D0F0048B1A6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,14 +240,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4C0939DF22123D0F0048B1A6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C0939E022123D0F0048B1A6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4C0939E422123D110048B1A6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
