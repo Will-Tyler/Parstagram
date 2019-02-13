@@ -28,8 +28,12 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 		view.backgroundColor = Colors.background
 
 		let signOutItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutItemAction))
+		let postItem = UIBarButtonItem(image: UIImage(named: "add_box"), style: .plain, target: self, action: #selector(postItemAction))
+
+		postItem.tintColor = .white
 
 		navigationItem.setLeftBarButton(signOutItem, animated: false)
+		navigationItem.setRightBarButton(postItem, animated: false)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -71,6 +75,11 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 				self.present(self.signInViewController, animated: true)
 			}
 		})
+	}
+
+	@objc
+	private func postItemAction() {
+		present(PostViewController(), animated: true)
 	}
 
 }
