@@ -26,6 +26,10 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 		super.viewDidLoad()
 
 		view.backgroundColor = Colors.background
+
+		let signOutItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutItemAction))
+
+		navigationItem.setLeftBarButton(signOutItem, animated: false)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -53,6 +57,18 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 			}
 			else {
 				self.dismiss(animated: true)
+			}
+		})
+	}
+
+	@objc
+	private func signOutItemAction() {
+		Firebase.signOut(completion: { error in
+			if let error = error {
+				self.alertUser(title: "Error Signing Out", message: error.localizedDescription)
+			}
+			else {
+				self.present(self.signInViewController, animated: true)
 			}
 		})
 	}

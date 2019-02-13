@@ -29,4 +29,17 @@ class Firebase {
 		Auth.auth().createUser(withEmail: email, password: password, completion: completion)
 	}
 
+	static func signOut(completion: ((Error?)->())? = nil) {
+		var _error: Error? = nil
+
+		do {
+			try Auth.auth().signOut()
+		}
+		catch {
+			_error = error
+		}
+
+		completion?(_error)
+	}
+
 }

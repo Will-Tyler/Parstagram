@@ -12,5 +12,6 @@ import UIKit
 struct Colors {
 
 	static let background = UIColor(white: 55 / 255, alpha: 1)
+	static let navigationBar = UIColor(white: 0x40 / 255, alpha: 1)
 
 }

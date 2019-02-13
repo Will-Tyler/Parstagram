@@ -14,7 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
+	private func setupAppearance() {
+		UINavigationBar.appearance().barTintColor = Colors.navigationBar
+		UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+	}
+
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+		setupAppearance()
 		Firebase.configure()
 
 		let viewController = ViewController()
