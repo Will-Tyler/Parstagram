@@ -72,4 +72,38 @@ class Firebase {
 		}
 	}
 
+	static func observePosts(with handler: @escaping ([FirebasePost], Error?)->()) {
+		if let currentUser = Auth.auth().currentUser {
+			let db = Firestore.firestore()
+			let postsRef = db.collection("users").document(currentUser.uid).collection("posts")
+
+			postsRef.addSnapshotListener({ (snapshot, error) in
+				if let error = error {
+					handler([], error)
+				}
+				else if let documents = snapshot?.documents {
+					var posts = [FirebasePost]()
+
+					documents.forEach({ (snapshot: QueryDocumentSnapshot) in
+						if let caption = snapshot["caption"] as? String {
+							let firebasePost = FirebasePost(id: snapshot.documentID, caption: caption, authorEmail: currentUser.email!)
+
+							posts.append(firebasePost)
+						}
+					})
+
+					handler(posts, nil)
+				}
+			})
+		}
+	}
+
+	static func handleImageData(for post: FirebasePost, with handler: @escaping (Data?, Error?)->()) {
+		if let currentUser = Auth.auth().currentUser {
+			let storageRef = Storage.storage().reference(withPath: "users/\(currentUser.uid)/\(post.id).png")
+
+			storageRef.getData(maxSize: .max, completion: handler)
+		}
+	}
+
 }

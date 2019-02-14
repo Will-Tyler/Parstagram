@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Firebase
 
 
-class ViewController: UIViewController, SignInViewControllerDelegate {
+class ViewController: UIViewController, SignInViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -20,12 +21,37 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	private lazy var tableView: UITableView = {
+		let table = UITableView()
+
+		table.backgroundColor = .clear
+		table.allowsSelection = false
+		table.delegate = self
+		table.dataSource = self
+		table.tableFooterView = UIView(frame: .zero)
+		table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+
+		return table
+	}()
 	private lazy var signInViewController = SignInViewController(delegate: self)
+
+	private func setupInitialLayout() {
+		view.addSubview(tableView)
+
+		let safeArea = view.safeAreaLayoutGuide
+
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		tableView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+		tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
+		tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+		tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		view.backgroundColor = Colors.background
+		setupInitialLayout()
 
 		let signOutItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutItemAction))
 		let postItem = UIBarButtonItem(image: UIImage(named: "add_box"), style: .plain, target: self, action: #selector(postItemAction))
@@ -34,6 +60,8 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 
 		navigationItem.setLeftBarButton(signOutItem, animated: false)
 		navigationItem.setRightBarButton(postItem, animated: false)
+
+		observePosts()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -80,6 +108,32 @@ class ViewController: UIViewController, SignInViewControllerDelegate {
 	@objc
 	private func postItemAction() {
 		present(PostViewController(), animated: true)
+	}
+
+	private func observePosts() {
+		Firebase.observePosts(with: { (posts, error) in
+			if let error = error {
+				self.alertUser(title: "Error", message: error.localizedDescription)
+			}
+			else {
+				self.posts = posts
+				self.tableView.reloadSections([0], with: .automatic)
+			}
+		})
+	}
+
+	private var posts = [FirebasePost]()
+
+	// tableView
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return posts.count
+	}
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+
+		cell.post = posts[indexPath.row]
+
+		return cell
 	}
 
 }
