@@ -74,7 +74,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 		textField.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
 		textField.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
 		textField.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
-		textField.bottomAnchor.constraint(equalTo: postButton.bottomAnchor, constant: -8).isActive = true
+		textField.bottomAnchor.constraint(equalTo: postButton.topAnchor, constant: -8).isActive = true
 	}
 
 	override func viewDidLoad() {
@@ -103,6 +103,20 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 
 	@objc
 	private func postButtonAction() {
+		guard let caption = textField.text, let pngData = imageView.image?.pngData() else {
+			return
+		}
+
+		let post = Post(caption: caption, pngData: pngData)
+
+		Firebase.add(post: post, completion: { error in
+			if let error = error {
+				self.alertUser(title: "Error Posting", message: error.localizedDescription)
+			}
+			else {
+				self.dismiss(animated: true)
+			}
+		})
 	}
 
 	// UIImagePickerControllerDelegate

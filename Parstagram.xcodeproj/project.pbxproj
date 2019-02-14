@@ -18,6 +18,7 @@
 		4C24C2802214620A00EAC6A1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27F2214620A00EAC6A1 /* UIViewController.swift */; };
 		4C24C2822214A1C600EAC6A1 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C24C2812214A1C600EAC6A1 /* Icons.xcassets */; };
 		4C24C2842214A53600EAC6A1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C2832214A53600EAC6A1 /* PostViewController.swift */; };
+		4CC569CB2214DD990057B5B0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569CA2214DD990057B5B0 /* Post.swift */; };
 		D2EAAE711DF64299014395AC /* Pods_Parstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5D8EF21A74C68C28F969E7 /* Pods_Parstagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		4C24C27F2214620A00EAC6A1 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4C24C2812214A1C600EAC6A1 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		4C24C2832214A53600EAC6A1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		4CC569CA2214DD990057B5B0 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DB77B599213D40CD51F1ED6B /* Pods-Parstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.release.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.release.xcconfig"; sourceTree = "<group>"; };
 		F286B5F1F5F1E46D5CCA9B5A /* Pods-Parstagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.debug.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 			children = (
 				4C0939DB22123D0F0048B1A6 /* AppDelegate.swift */,
 				4C0939ED221244710048B1A6 /* Colors.swift */,
+				4CC569CA2214DD990057B5B0 /* Post.swift */,
 				4C24C2832214A53600EAC6A1 /* PostViewController.swift */,
 				4C24C27B2214601300EAC6A1 /* SignInViewController.swift */,
 				4C24C27F2214620A00EAC6A1 /* UIViewController.swift */,
@@ -195,8 +198,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Parstagram/Pods-Parstagram-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -205,8 +213,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +259,7 @@
 				4C24C2802214620A00EAC6A1 /* UIViewController.swift in Sources */,
 				4C0939EE221244710048B1A6 /* Colors.swift in Sources */,
 				4C24C2842214A53600EAC6A1 /* PostViewController.swift in Sources */,
+				4CC569CB2214DD990057B5B0 /* Post.swift in Sources */,
 				4C0939F3221247310048B1A6 /* Firebase.swift in Sources */,
 				4C24C27E2214607D00EAC6A1 /* ViewController.swift in Sources */,
 				4C24C27C2214601300EAC6A1 /* SignInViewController.swift in Sources */,

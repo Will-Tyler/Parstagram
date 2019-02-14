@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseFirestore
 
 
 class Firebase {
@@ -40,6 +41,35 @@ class Firebase {
 		}
 
 		completion?(_error)
+	}
+
+	static func add(post: Post, completion: ((Error?)->())? = nil) {
+		if let currentUser = Auth.auth().currentUser {
+			let db = Firestore.firestore()
+			let dataDictionary: [String: Any] = [
+				"caption": post.caption,
+				"date": Date()
+			]
+
+			let document = db.collection("users").document(currentUser.uid).collection("posts").document()
+			let id = document.documentID
+
+			document.setData(dataDictionary, completion: { error in
+				if let error = error {
+					completion?(error)
+				}
+				else {
+					let storage = Storage.storage().reference(withPath: "users/\(currentUser.uid)/\(id).png")
+					let metadata = StorageMetadata()
+
+					metadata.contentType = "image/png"
+
+					storage.putData(post.pngData, metadata: metadata, completion: { (metadata, error) in
+						completion?(error)
+					})
+				}
+			})
+		}
 	}
 
 }

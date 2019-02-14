@@ -5,8 +5,10 @@ target 'Parstagram' do
   use_frameworks!
 
   # Pods for Parstagram
-	pod 'Firebase/Core'
-	pod 'Firebase/Auth'
 	pod 'AlamofireImage'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Core'
+	pod 'Firebase/Firestore'
+	pod 'Firebase/Storage'
 
 end
