@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		setupAppearance()
 		Firebase.configure()
 
-		let viewController = ViewController()
+		let viewController = FeedViewController()
 		let navigation = UINavigationController(rootViewController: viewController)
 
 		window = UIWindow(frame: UIScreen.main.bounds)

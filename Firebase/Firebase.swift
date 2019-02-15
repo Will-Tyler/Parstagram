@@ -43,67 +43,42 @@ class Firebase {
 		completion?(_error)
 	}
 
-	static func add(post: Post, completion: ((Error?)->())? = nil) {
-		if let currentUser = Auth.auth().currentUser {
-			let db = Firestore.firestore()
-			let dataDictionary: [String: Any] = [
-				"caption": post.caption,
-				"date": Date()
-			]
+	@discardableResult
+	static func post(pngData: Data, caption: String = "", completion: ((Error?)->())? = nil) -> Post {
+		let authorID = Auth.auth().currentUser!.uid
+		let db = Firestore.firestore()
+		let document = db.collection("users").document(authorID).collection("posts").document()
+		let id = document.documentID
+		let post = Post(id: id, caption: caption, authorID: authorID, date: Date(), pngData: pngData)
+		let dataDictionary: [String: Any] = [
+			"caption": post.caption,
+			"date": post.date,
+			"authorID": post.authorID
+		]
 
-			let document = db.collection("users").document(currentUser.uid).collection("posts").document()
-			let id = document.documentID
+		document.setData(dataDictionary, completion: { error in
+			if let error = error {
+				completion?(error)
+			}
+			else {
+				let storage = Storage.storage().reference(withPath: "users/\(authorID)/\(id).png")
+				let metadata = StorageMetadata()
 
-			document.setData(dataDictionary, completion: { error in
-				if let error = error {
+				metadata.contentType = "image/png"
+
+				storage.putData(pngData, metadata: metadata, completion: { (metadata, error) in
 					completion?(error)
-				}
-				else {
-					let storage = Storage.storage().reference(withPath: "users/\(currentUser.uid)/\(id).png")
-					let metadata = StorageMetadata()
+				})
+			}
+		})
 
-					metadata.contentType = "image/png"
-
-					storage.putData(post.pngData, metadata: metadata, completion: { (metadata, error) in
-						completion?(error)
-					})
-				}
-			})
-		}
+		return post
 	}
 
-	static func observePosts(with handler: @escaping ([FirebasePost], Error?)->()) {
-		if let currentUser = Auth.auth().currentUser {
-			let db = Firestore.firestore()
-			let postsRef = db.collection("users").document(currentUser.uid).collection("posts")
-
-			postsRef.addSnapshotListener({ (snapshot, error) in
-				if let error = error {
-					handler([], error)
-				}
-				else if let documents = snapshot?.documents {
-					var posts = [FirebasePost]()
-
-					documents.forEach({ (snapshot: QueryDocumentSnapshot) in
-						if let caption = snapshot["caption"] as? String {
-							let firebasePost = FirebasePost(id: snapshot.documentID, caption: caption, authorEmail: currentUser.email!)
-
-							posts.append(firebasePost)
-						}
-					})
-
-					handler(posts, nil)
-				}
-			})
-		}
-	}
-
-	static func handleImageData(for post: FirebasePost, with handler: @escaping (Data?, Error?)->()) {
-		if let currentUser = Auth.auth().currentUser {
-			let storageRef = Storage.storage().reference(withPath: "users/\(currentUser.uid)/\(post.id).png")
-
-			storageRef.getData(maxSize: .max, completion: handler)
-		}
+	static func handlePNGData(for post: Post, with handler: @escaping (Data?, Error?)->()) {
+		Storage.storage().reference(withPath: "users/\(Auth.auth().currentUser!.uid)/\(post.id).png").getData(maxSize: .max, completion: { (data, error) in
+			handler(data, error)
+		})
 	}
 
 }

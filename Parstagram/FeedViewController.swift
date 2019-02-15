@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FeedViewController.swift
 //  Parstagram
 //
 //  Created by Will Tyler on 2/13/19.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class ViewController: UIViewController, SignInViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, SignInViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -111,18 +111,9 @@ class ViewController: UIViewController, SignInViewControllerDelegate, UITableVie
 	}
 
 	private func observePosts() {
-		Firebase.observePosts(with: { (posts, error) in
-			if let error = error {
-				self.alertUser(title: "Error", message: error.localizedDescription)
-			}
-			else {
-				self.posts = posts
-				self.tableView.reloadSections([0], with: .automatic)
-			}
-		})
 	}
 
-	private var posts = [FirebasePost]()
+	private var posts = [Post]()
 
 	// tableView
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

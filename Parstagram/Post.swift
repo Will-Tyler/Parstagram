@@ -11,7 +11,19 @@ import Foundation
 
 struct Post {
 
+	let id: String
 	let caption: String
-	let pngData: Data
+	let authorID: String
+	let date: Date
+	var pngData: Data?
+
+	func handlePNGData(with handler: @escaping (Data?, Error?)->()) {
+		if let data = pngData {
+			handler(data, nil)
+		}
+		else {
+			Firebase.handlePNGData(for: self, with: handler)
+		}
+	}
 
 }

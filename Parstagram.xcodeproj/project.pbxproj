@@ -14,13 +14,12 @@
 		4C0939F0221246640048B1A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C0939EF221246630048B1A6 /* GoogleService-Info.plist */; };
 		4C0939F3221247310048B1A6 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0939F2221247310048B1A6 /* Firebase.swift */; };
 		4C24C27C2214601300EAC6A1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27B2214601300EAC6A1 /* SignInViewController.swift */; };
-		4C24C27E2214607D00EAC6A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27D2214607D00EAC6A1 /* ViewController.swift */; };
+		4C24C27E2214607D00EAC6A1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27D2214607D00EAC6A1 /* FeedViewController.swift */; };
 		4C24C2802214620A00EAC6A1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27F2214620A00EAC6A1 /* UIViewController.swift */; };
 		4C24C2822214A1C600EAC6A1 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C24C2812214A1C600EAC6A1 /* Icons.xcassets */; };
 		4C24C2842214A53600EAC6A1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C2832214A53600EAC6A1 /* PostViewController.swift */; };
 		4CC569CB2214DD990057B5B0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569CA2214DD990057B5B0 /* Post.swift */; };
 		4CC569CD2214F4800057B5B0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569CC2214F4800057B5B0 /* PostTableViewCell.swift */; };
-		4CC569D1221507A60057B5B0 /* FirebasePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569D0221507A60057B5B0 /* FirebasePost.swift */; };
 		D2EAAE711DF64299014395AC /* Pods_Parstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5D8EF21A74C68C28F969E7 /* Pods_Parstagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,13 +34,12 @@
 		4C0939EF221246630048B1A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C0939F2221247310048B1A6 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		4C24C27B2214601300EAC6A1 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		4C24C27D2214607D00EAC6A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C24C27D2214607D00EAC6A1 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4C24C27F2214620A00EAC6A1 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4C24C2812214A1C600EAC6A1 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		4C24C2832214A53600EAC6A1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4CC569CA2214DD990057B5B0 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4CC569CC2214F4800057B5B0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		4CC569D0221507A60057B5B0 /* FirebasePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePost.swift; sourceTree = "<group>"; };
 		DB77B599213D40CD51F1ED6B /* Pods-Parstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.release.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.release.xcconfig"; sourceTree = "<group>"; };
 		F286B5F1F5F1E46D5CCA9B5A /* Pods-Parstagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.debug.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,12 +89,12 @@
 			children = (
 				4C0939DB22123D0F0048B1A6 /* AppDelegate.swift */,
 				4C0939ED221244710048B1A6 /* Colors.swift */,
+				4C24C27D2214607D00EAC6A1 /* FeedViewController.swift */,
 				4CC569CA2214DD990057B5B0 /* Post.swift */,
 				4CC569CC2214F4800057B5B0 /* PostTableViewCell.swift */,
 				4C24C2832214A53600EAC6A1 /* PostViewController.swift */,
 				4C24C27B2214601300EAC6A1 /* SignInViewController.swift */,
 				4C24C27F2214620A00EAC6A1 /* UIViewController.swift */,
-				4C24C27D2214607D00EAC6A1 /* ViewController.swift */,
 				4C0939E222123D110048B1A6 /* Assets.xcassets */,
 				4C24C2812214A1C600EAC6A1 /* Icons.xcassets */,
 				4C0939E422123D110048B1A6 /* LaunchScreen.storyboard */,
@@ -109,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				4C0939F2221247310048B1A6 /* Firebase.swift */,
-				4CC569D0221507A60057B5B0 /* FirebasePost.swift */,
 				4C0939EF221246630048B1A6 /* GoogleService-Info.plist */,
 			);
 			path = Firebase;
@@ -264,11 +261,10 @@
 			files = (
 				4C24C2802214620A00EAC6A1 /* UIViewController.swift in Sources */,
 				4C0939EE221244710048B1A6 /* Colors.swift in Sources */,
-				4CC569D1221507A60057B5B0 /* FirebasePost.swift in Sources */,
 				4C24C2842214A53600EAC6A1 /* PostViewController.swift in Sources */,
 				4CC569CB2214DD990057B5B0 /* Post.swift in Sources */,
 				4C0939F3221247310048B1A6 /* Firebase.swift in Sources */,
-				4C24C27E2214607D00EAC6A1 /* ViewController.swift in Sources */,
+				4C24C27E2214607D00EAC6A1 /* FeedViewController.swift in Sources */,
 				4C24C27C2214601300EAC6A1 /* SignInViewController.swift in Sources */,
 				4C0939DC22123D0F0048B1A6 /* AppDelegate.swift in Sources */,
 				4CC569CD2214F4800057B5B0 /* PostTableViewCell.swift in Sources */,

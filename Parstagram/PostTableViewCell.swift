@@ -69,16 +69,14 @@ class PostTableViewCell: UITableViewCell {
 	}
 
 	private var didSetupInitialLayout = false
-	var post: FirebasePost! {
+	var post: Post! {
 		didSet {
-			authorLabel.text = post.authorEmail
 			captionLabel.text = post.caption
-			Firebase.handleImageData(for: post, with: { (data, error) in
-				if let error = error {
-					print(error)
-				}
-				else if let data = data {
-					self.postImageView.image = UIImage(data: data)
+			post.handlePNGData(with: { (data, error) in
+				if let data = data {
+					let image = UIImage(data: data)
+
+					self.postImageView.image = image
 				}
 			})
 

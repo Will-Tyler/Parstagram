@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 
-class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
 	private lazy var imageView: UIImageView = {
 		let view = UIImageView()
@@ -32,9 +32,11 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 	private lazy var textField: UITextField = {
 		let field = UITextField()
 
+		field.delegate = self
 		field.contentVerticalAlignment = .top
 		field.attributedPlaceholder = NSAttributedString(string: "Enter a caption here.", attributes: [.foregroundColor: UIColor.lightText])
 		field.textColor = .white
+		field.returnKeyType = .done
 
 		return field
 	}()
@@ -50,16 +52,32 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 
 		return button
 	}()
+	private lazy var clearButton: UIButton = {
+		let button = UIButton()
+		let image = UIImage(named: "clear")!
+
+		button.setImage(image, for: .normal)
+		button.addTarget(self, action: #selector(clearButtonAction), for: .touchUpInside)
+
+		return button
+	}()
 
 	private func setupInitialLayout() {
+		view.addSubview(clearButton)
 		view.addSubview(imageView)
 		view.addSubview(postButton)
 		view.addSubview(textField)
 
 		let safeArea = view.safeAreaLayoutGuide
 
+		clearButton.translatesAutoresizingMaskIntoConstraints = false
+		clearButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 8).isActive = true
+		clearButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8).isActive = true
+		clearButton.heightAnchor.constraint(equalToConstant: clearButton.intrinsicContentSize.height).isActive = true
+		clearButton.widthAnchor.constraint(equalToConstant: clearButton.intrinsicContentSize.width).isActive = true
+
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 8).isActive = true
+		imageView.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: 8).isActive = true
 		imageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 8).isActive = true
 		imageView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -8).isActive = true
 		imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
@@ -107,9 +125,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 			return
 		}
 
-		let post = Post(caption: caption, pngData: pngData)
-
-		Firebase.add(post: post, completion: { error in
+		Firebase.post(pngData: pngData, caption: caption, completion: { error in
 			if let error = error {
 				self.alertUser(title: "Error Posting", message: error.localizedDescription)
 			}
@@ -117,6 +133,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 				self.dismiss(animated: true)
 			}
 		})
+	}
+	@objc
+	private func clearButtonAction() {
+		self.dismiss(animated: true)
 	}
 
 	// UIImagePickerControllerDelegate
@@ -128,6 +148,13 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 			imageView.image = scaledImage
 			dismiss(animated: true)
 		}
+	}
+
+	// UITextField
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		view.endEditing(true)
+
+		return true
 	}
 
 }
