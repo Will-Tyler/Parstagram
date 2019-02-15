@@ -56,8 +56,6 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		let signOutItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutItemAction))
 		let postItem = UIBarButtonItem(image: UIImage(named: "add_box"), style: .plain, target: self, action: #selector(postItemAction))
 
-		postItem.tintColor = .white
-
 		navigationItem.setLeftBarButton(signOutItem, animated: false)
 		navigationItem.setRightBarButton(postItem, animated: false)
 

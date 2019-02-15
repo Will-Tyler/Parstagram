@@ -13,5 +13,6 @@ struct Colors {
 
 	static let background = UIColor(white: 55 / 255, alpha: 1)
 	static let navigationBar = UIColor(white: 0x40 / 255, alpha: 1)
+	static let tint = UIColor(red: 0, green: 0x85 / 255, blue: 0xBA / 255, alpha: 1)
 
 }

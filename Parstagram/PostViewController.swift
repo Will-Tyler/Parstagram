@@ -16,7 +16,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 		let view = UIImageView()
 
 		view.clipsToBounds = true
-		view.contentMode = .scaleAspectFill
+		view.contentMode = .scaleAspectFit
 		view.backgroundColor = .lightGray
 		view.isUserInteractionEnabled = true
 
@@ -119,13 +119,17 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 		present(picker, animated: true)
 	}
 
+	private var isPosting = false
 	@objc
 	private func postButtonAction() {
-		guard let caption = textField.text, let pngData = imageView.image?.pngData() else {
+		guard !isPosting, let caption = textField.text, let pngData = imageView.image?.pngData() else {
 			return
 		}
 
+		isPosting = true
 		Firebase.post(pngData: pngData, caption: caption, completion: { error in
+			self.isPosting = false
+
 			if let error = error {
 				self.alertUser(title: "Error Posting", message: error.localizedDescription)
 			}
