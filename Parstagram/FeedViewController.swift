@@ -59,7 +59,7 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		navigationItem.setLeftBarButton(signOutItem, animated: false)
 		navigationItem.setRightBarButton(postItem, animated: false)
 
-		observePosts()
+		observeFeed()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -108,7 +108,16 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		present(PostViewController(), animated: true)
 	}
 
-	private func observePosts() {
+	private func observeFeed() {
+		Firebase.observeFeed(with: { (posts, error) in
+			if let error = error {
+				self.alertUser(title: "Error", message: error.localizedDescription)
+			}
+			else if let posts = posts {
+				self.posts.insert(contentsOf: posts, at: 0)
+				self.tableView.reloadSections([0], with: .automatic)
+			}
+		})
 	}
 
 	private var posts = [Post]()

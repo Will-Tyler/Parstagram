@@ -17,7 +17,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Insta" translatesAutoresizingMaskIntoConstraints="NO" id="TaA-De-8mQ">
+                                <rect key="frame" x="94" y="250" width="187.5" height="187.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TaA-De-8mQ" secondAttribute="height" multiplier="1:1" id="lXZ-hv-vBQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="0.23000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TaA-De-8mQ" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="1/2" id="bap-dV-Wkk"/>
+                            <constraint firstItem="TaA-De-8mQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fQ9-kZ-TOf"/>
+                            <constraint firstItem="TaA-De-8mQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="vPj-QV-c7w"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -26,4 +39,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Insta" width="500" height="500"/>
+    </resources>
 </document>

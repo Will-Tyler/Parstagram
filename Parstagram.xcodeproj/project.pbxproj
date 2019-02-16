@@ -18,6 +18,7 @@
 		4C24C2802214620A00EAC6A1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C27F2214620A00EAC6A1 /* UIViewController.swift */; };
 		4C24C2822214A1C600EAC6A1 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C24C2812214A1C600EAC6A1 /* Icons.xcassets */; };
 		4C24C2842214A53600EAC6A1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C24C2832214A53600EAC6A1 /* PostViewController.swift */; };
+		4C97773422179C51006E18C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4C97773322179C51006E18C5 /* README.md */; };
 		4CC569CB2214DD990057B5B0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569CA2214DD990057B5B0 /* Post.swift */; };
 		4CC569CD2214F4800057B5B0 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC569CC2214F4800057B5B0 /* PostTableViewCell.swift */; };
 		D2EAAE711DF64299014395AC /* Pods_Parstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5D8EF21A74C68C28F969E7 /* Pods_Parstagram.framework */; };
@@ -38,6 +39,7 @@
 		4C24C27F2214620A00EAC6A1 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		4C24C2812214A1C600EAC6A1 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		4C24C2832214A53600EAC6A1 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		4C97773322179C51006E18C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4CC569CA2214DD990057B5B0 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4CC569CC2214F4800057B5B0 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DB77B599213D40CD51F1ED6B /* Pods-Parstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parstagram.release.xcconfig"; path = "Target Support Files/Pods-Parstagram/Pods-Parstagram.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		4C0939CF22123D0F0048B1A6 = {
 			isa = PBXGroup;
 			children = (
+				4C97773322179C51006E18C5 /* README.md */,
 				4C0939F1221247220048B1A6 /* Firebase */,
 				4C0939DA22123D0F0048B1A6 /* Parstagram */,
 				4C0939D922123D0F0048B1A6 /* Products */,
@@ -182,6 +185,7 @@
 			files = (
 				4C0939E622123D110048B1A6 /* LaunchScreen.storyboard in Resources */,
 				4C0939E322123D110048B1A6 /* Assets.xcassets in Resources */,
+				4C97773422179C51006E18C5 /* README.md in Resources */,
 				4C24C2822214A1C600EAC6A1 /* Icons.xcassets in Resources */,
 				4C0939F0221246640048B1A6 /* GoogleService-Info.plist in Resources */,
 			);

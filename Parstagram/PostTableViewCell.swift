@@ -44,24 +44,34 @@ class PostTableViewCell: UITableViewCell {
 	}
 
 	private func setupInitialLayout() {
+		let headerView = UIView()
+
+		headerView.addSubview(authorLabel)
+
+		authorLabel.translatesAutoresizingMaskIntoConstraints = false
+		authorLabel.heightAnchor.constraint(equalToConstant: authorLabel.intrinsicContentSize.height).isActive = true
+		authorLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+		authorLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20).isActive = true
+		authorLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
+
+		addSubview(headerView)
 		addSubview(postImageView)
-		addSubview(authorLabel)
 		addSubview(captionLabel)
 
+		headerView.translatesAutoresizingMaskIntoConstraints = false
+		headerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		headerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		headerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+		headerView.heightAnchor.constraint(equalToConstant: 64).isActive = true
+
 		postImageView.translatesAutoresizingMaskIntoConstraints = false
-		postImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		postImageView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
 		postImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		postImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		postImageView.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
 
-		authorLabel.translatesAutoresizingMaskIntoConstraints = false
-		authorLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor).isActive = true
-		authorLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-		authorLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-		authorLabel.heightAnchor.constraint(equalToConstant: authorLabel.intrinsicContentSize.height).isActive = true
-
 		captionLabel.translatesAutoresizingMaskIntoConstraints = false
-		captionLabel.topAnchor.constraint(equalTo: authorLabel.bottomAnchor).isActive = true
+		captionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor).isActive = true
 		captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
@@ -71,6 +81,7 @@ class PostTableViewCell: UITableViewCell {
 	private var didSetupInitialLayout = false
 	var post: Post! {
 		didSet {
+			authorLabel.text = "will@gmail.com"
 			captionLabel.text = post.caption
 			post.handlePNGData(with: { (data, error) in
 				if let data = data {

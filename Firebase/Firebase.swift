@@ -81,4 +81,31 @@ class Firebase {
 		})
 	}
 
+	static func observeFeed(with handler: @escaping ([Post]?, Error?)->()) {
+		if let currentUser = Auth.auth().currentUser {
+			let db = Firestore.firestore()
+
+			db.collection("users").document(currentUser.uid).collection("posts").order(by: "date", descending: true).addSnapshotListener({ (snapshot, error) in
+				if let error = error {
+					handler(nil, error)
+				}
+				else if let changes = snapshot?.documentChanges {
+					let additions = changes.filter({ $0.type == .added })
+					let posts = additions.map({ (change: DocumentChange) -> Post in
+						let doc = change.document
+						let id = doc.documentID
+						let data = doc.data()
+						let authorID = data["authorID"] as! String
+						let caption = data["caption"] as! String
+						let date = (data["date"] as! Timestamp).dateValue()
+
+						return Post(id: id, caption: caption, authorID: authorID, date: date, pngData: nil)
+					})
+
+					handler(posts, nil)
+				}
+			})
+		}
+	}
+
 }

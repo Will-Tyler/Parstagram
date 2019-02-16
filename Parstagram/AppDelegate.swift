@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	private func setupAppearance() {
-		UIBarButtonItem.appearance().tintColor = Colors.tint
-		
+//		UIBarButtonItem.appearance().tintColor = Colors.tint
+
 		UINavigationBar.appearance().barTintColor = Colors.navigationBar
 		UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
 	}
