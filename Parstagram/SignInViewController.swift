@@ -32,6 +32,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		let items = ["Sign In", "Register"]
 		let control = UISegmentedControl(items: items)
 
+		control.tintColor = Colors.tint
 		control.selectedSegmentIndex = 0
 		control.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         control.accessibilityIdentifier = "Sign-in Toggle"
@@ -160,6 +161,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
 			guard endHeightFromBottom > 0 else {
 				fieldContainerCenterYConstraint.constant = 0
+				UIView.animate(withDuration: 0.3, animations: {
+					self.view.layoutIfNeeded()
+				})
+
 				return
 			}
 
@@ -167,6 +172,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 			let newOffset = viewHeight / 2 - endHeightFromTop / 2
 
 			fieldContainerCenterYConstraint.constant = -newOffset
+			UIView.animate(withDuration: 0.3, animations: {
+				self.view.layoutIfNeeded()
+			})
 		}
 	}
 
