@@ -138,8 +138,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(endEditing))
 
 		view.addGestureRecognizer(tapRecognizer)
-
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboard(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

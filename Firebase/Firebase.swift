@@ -98,8 +98,13 @@ class Firebase {
 						let authorID = data["authorID"] as! String
 						let caption = data["caption"] as! String
 						let date = (data["date"] as! Timestamp).dateValue()
+						var post = Post(id: id, caption: caption, authorID: authorID, date: date, pngData: nil)
 
-						return Post(id: id, caption: caption, authorID: authorID, date: date, pngData: nil)
+						if let comments = data["comments"] as? [[String: String]] {
+							post.comments = comments.map({ Comment(authorID: $0["authorID"]!, content: $0["content"]!) })
+						}
+
+						return post
 					})
 
 					handler(posts, nil)

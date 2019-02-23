@@ -8,9 +8,10 @@
 
 import UIKit
 import Firebase
+import MessageInputBar
 
 
-class FeedViewController: UIViewController, SignInViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, SignInViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, MessageInputBarDelegate {
 
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -18,20 +19,35 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		title = "Parstagram"
 	}
 	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+	}
+
+	deinit {
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	private lazy var tableView: UITableView = {
 		let table = UITableView()
 
 		table.backgroundColor = .clear
-		table.allowsSelection = false
+		table.keyboardDismissMode = .interactive
 		table.delegate = self
 		table.dataSource = self
 		table.tableFooterView = UIView(frame: .zero)
 		table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+		table.register(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
+		table.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
 
 		return table
+	}()
+	private lazy var messageInputBar: MessageInputBar = {
+		let input = MessageInputBar()
+
+		input.inputTextView.placeholder = "Add a comment..."
+		input.sendButton.setTitle("Post", for: .normal)
+		input.delegate = self
+
+		return input
 	}()
 	private lazy var signInViewController = SignInViewController(delegate: self)
 
@@ -60,6 +76,8 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		navigationItem.setRightBarButton(postItem, animated: false)
 
 		observeFeed()
+
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -67,6 +85,21 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 		if !Firebase.isSignedIn {
 			present(signInViewController, animated: false)
 		}
+	}
+
+	private var showMessageInputBar = false
+	override var inputAccessoryView: UIView? {
+		return messageInputBar
+	}
+	override var canBecomeFirstResponder: Bool {
+		return showMessageInputBar
+	}
+
+	@objc
+	private func keyboardWillHide(_ notification: Notification) {
+		messageInputBar.inputTextView.text = nil
+		showMessageInputBar = false
+		becomeFirstResponder()
 	}
 
 	// SignInViewControllerDelegate
@@ -115,23 +148,84 @@ class FeedViewController: UIViewController, SignInViewControllerDelegate, UITabl
 			}
 			else if let posts = posts {
 				self.posts.insert(contentsOf: posts, at: 0)
-				self.tableView.reloadSections([0], with: .automatic)
+				self.tableView.reloadData()
 			}
 		})
 	}
 
 	private var posts = [Post]()
+	private var lastSelectedPost: Post?
 
 	// tableView
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	private func isSelectable(_ path: IndexPath) -> IndexPath? {
+		return path.row != 0 ? path : nil
+	}
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return posts.count
 	}
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1 + (posts[section].comments?.count ?? 0) + 1
+	}
+	func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+		return isSelectable(indexPath) != nil
+	}
+	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		return isSelectable(indexPath)
+	}
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		lastSelectedPost = posts[indexPath.section]
+		
+		showMessageInputBar = true
+		becomeFirstResponder()
+		messageInputBar.inputTextView.becomeFirstResponder()
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+		var post = posts[indexPath.section]
 
-		cell.post = posts[indexPath.row]
+		post.didSetComments = {
+			tableView.reloadData()
+		}
 
-		return cell
+		if indexPath.row == 0 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+
+			cell.post = post
+
+			return cell
+		}
+		else if indexPath.row < (post.comments?.count ?? 0) + 1 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+			let comment = post.comments![indexPath.row-1]
+
+			cell.backgroundColor = .clear
+			cell.textLabel?.text = comment.content
+			cell.textLabel?.textColor = .white
+
+			return cell
+		}
+		else {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+
+			cell.backgroundColor = .clear
+			cell.textLabel?.text = "Add a comment..."
+			cell.textLabel?.textColor = .white
+
+			return cell
+		}
+	}
+
+	func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+		let content = text
+		let authorID = Auth.auth().currentUser!.uid
+		let comment = Comment(authorID: authorID, content: content)
+
+		lastSelectedPost?.post(comment: comment)
+
+		messageInputBar.inputTextView.text = nil
+		showMessageInputBar = false
+		becomeFirstResponder()
+		inputBar.inputTextView.resignFirstResponder()
 	}
 
 }

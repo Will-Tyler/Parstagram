@@ -71,11 +71,11 @@ class PostTableViewCell: UITableViewCell {
 		postImageView.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
 
 		captionLabel.translatesAutoresizingMaskIntoConstraints = false
-		captionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor).isActive = true
-		captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		captionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 8).isActive = true
+		captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
 		captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
-		bottomAnchor.constraint(equalTo: captionLabel.bottomAnchor).isActive = true
+		bottomAnchor.constraint(equalTo: captionLabel.bottomAnchor, constant: 8).isActive = true
 	}
 
 	private var didSetupInitialLayout = false
